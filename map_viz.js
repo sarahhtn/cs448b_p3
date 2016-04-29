@@ -22,6 +22,8 @@ svg.append("image")
           .attr("height", height)
           .attr("xlink:href", "data/sf-map.svg");
 
+
+
 d3.json("data/scpd_incidents.json", function(error, data) {
   // This function gets called when the request is resolved (either failed or succeeded)
 
@@ -42,4 +44,13 @@ d3.json("data/scpd_incidents.json", function(error, data) {
 		.attr("fill", "red");
 
 });
+
+
+
+// var circleAttributes = circles
+//                        .attr("cx", function (d) { return d.x_axis; })
+//                        .attr("cy", function (d) { return d.y_axis; })
+//                        .attr("r", function (d) { return d.radius; })
+//                        .style("fill", function(d) { return d.color; });
+
 
