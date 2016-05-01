@@ -66,6 +66,14 @@ d3.selectAll(".dow").on("change", function(){
 		.attr("visibility", visibility);
 });
 
+d3.selectAll(".crime-category").on("change", function(){
+	var category = this.value;
+	var visibility = this.checked ? "visible" : "hidden";
+	svg.selectAll("circle")
+		.filter(function(d){ return categoryDict[d.Category] == category})
+		.attr("visibility", visibility);
+});
+
 //INITALIZING COLORS & CATEGORIES
 var categories = ["Domestic", "Financial/Fraud", "Non-Violent", "Other", "Property", "Sex-Related", "Substance-Related", "Theft", "Vehicle", "Violent", "Weapons"];
 
@@ -136,12 +144,4 @@ for (var i=0; i<categories.length; i++){
 		$('#category-selectors').append("</br>");
 	}
 }
-
-d3.selectAll(".crime-category").on("change", function(){
-	var category = this.value;
-	var visibility = this.checked ? "visible" : "hidden";
-	svg.selectAll("circle")
-		.filter(function(d){ return categoryDict[d.Category] == category})
-		.attr("visibility", visibility);
-});
 
