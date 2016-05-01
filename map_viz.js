@@ -223,14 +223,6 @@ d3.selectAll(".dow").on("change", function(){
 		.attr("visibility", visibility);
 });
 
-d3.selectAll(".crime-category").on("change", function(){
-	var category = this.value;
-	var visibility = this.checked ? "visible" : "hidden";
-	svg.selectAll("circle")
-		.filter(function(d){ return categoryDict[d.Category] == category})
-		.attr("visibility", visibility);
-});
-
 //INITALIZING COLORS & CATEGORIES
 var categories = ["Domestic", "Financial/Fraud", "Non-Violent", "Other", "Property", "Sex-Related", "Substance-Related", "Theft", "Vehicle", "Violent", "Weapons"];
 
@@ -286,14 +278,18 @@ categoryDict["ASSAULT"] = "Violent";
 
 categoryDict["WEAPON LAWS"] = "Weapons";
 
+// set d3 color coding
 var color = d3.scale.ordinal()
 	.domain(categories)
 	.range(["#9e0142","#d53e4f","#f46d43","#fdae61","#fee08b","#ffffbf","#e6f598","#abdda4","#66c2a5","#3288bd","#5e4fa2"]);
 
+// function passed into cretion of data points to translate category to supercategory to color
 var colorCrimeCategory = function(subcategory){
 	cat = categoryDict[subcategory];
 	return cat ? color(cat) : "black";
 }
+
+// create the categories input controls, along with color swatches
 for (var i=0; i<categories.length; i++){
 	category = categories[i];
 	$('#category-selectors').append("<div class='category-wrapper'><label><input type='checkbox' value=" + category+ " class='crime-category' checked>" + category + "</label><div class='color-swatch' style='background-color:"+color(category)+";'</div></div>");
@@ -301,4 +297,12 @@ for (var i=0; i<categories.length; i++){
 		$('#category-selectors').append("</br>");
 	}
 }
+
+d3.selectAll(".crime-category").on("change", function(){
+	var category = this.value;
+	var visibility = this.checked ? "visible" : "hidden";
+	svg.selectAll("circle")
+		.filter(function(d){ return categoryDict[d.Category] == category})
+		.attr("visibility", visibility);
+});
 
