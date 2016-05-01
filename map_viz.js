@@ -40,7 +40,7 @@ d3.json("data/scpd_incidents.json", function(error, data) {
 		.attr("cx", function (d) { return projection(d.Location)[0]; })
 		.attr("cy", function (d) { return projection(d.Location)[1]; })
 		.attr("r", "2px")
-		.attr("fill", "black")
+		.attr("fill", function (d) {return colorCrimeCategory(d.Category)})
 		.attr("visibility", "hidden");
    visiblePoints();
 
@@ -293,9 +293,6 @@ var colorCrimeCategory = function(subcategory){
 for (var i=0; i<categories.length; i++){
 	category = categories[i];
 	$('#category-selectors').append("<div class='category-wrapper'><label><input type='checkbox' value=" + category+ " class='crime-category' checked>" + category + "</label><div class='color-swatch' style='background-color:"+color(category)+";'</div></div>");
-	if((i+1)%2==0){
-		$('#category-selectors').append("</br>");
-	}
 }
 
 d3.selectAll(".crime-category").on("change", function(){
