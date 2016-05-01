@@ -1,0 +1,16 @@
+body {
+	font-family: sans-serif;
+}
+
+.color-swatch{
+	width: 10px;
+	height: 10px;
+	display: inline-block;
+	margin-left: 5px;
+	margin-right: 10px;
+}
+
+.category-wrapper{
+	display: inline-block;
+	min-width: 200px;
+}
