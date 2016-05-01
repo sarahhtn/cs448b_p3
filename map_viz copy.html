@@ -1,34 +1,15 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1"> 
+		<style src="map_viz.css"></style>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-		<link type="text/css" rel="stylesheet" href="src/css/legend.css">
-		<link type="text/css" rel="stylesheet" href="extensions.css?v=2">
-		<script src="d3/d3.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-		<link type="text/css" rel="stylesheet" href="map_viz.css">
+		<script type="text/javascript" src="d3/d3.min.js"></script>
 	</head>
 	<body>
 	<div id="content">
 	<form id="side_panel">
 		<h1>Random Data in the Future</h1>
-		<section>			
-			<div id="query-controls">
-					Day of the week:<br>
-					<input type="checkbox" value="Sunday" class="dow" checked>Sunday</input><br>
-					<input type="checkbox" value="Monday" class="dow" checked>Monday</input><br>
-					<input type="checkbox" value="Tuesday" class="dow" checked>Tuesday</input><br>
-					<input type="checkbox" value="Wednesday" class="dow" checked>Wednesday</input><br>
-					<input type="checkbox" value="Thursday" class="dow" checked>Thursday</input><br>
-					<input type="checkbox" value="Friday" class="dow" checked>Friday</input><br>
-					<input type="checkbox" value="Saturday" class="dow" checked>Saturday</input><br>
-			</div>
-		</section>
+		<section><div id="legend"></div></section>
 		<section>
 			<div id="renderer_form" class="toggler">
 				<input type="radio" name="renderer" id="area" value="area" checked>
@@ -75,22 +56,15 @@
 				</label>
 			</div>
 		</section>
-		<section id="area_slider">
-			<h6 id="slider_A_label">Home</h6>
-			<div id="slider_A"></div>
-			<h6 id="slider_B_label">Work</h6>
-			<div id="slider_B"></div>
+		<section>
+			<h6>Smoothing</h6>
+			<div id="smoother"></div>
 		</section>
 		<section></section>
 	</form>
-	<div id="chart_container">
-		<div id="map"></div>
-		<div id="chart"></div>
-	</div>
+	<div id="map"></div>
 	</div>
 	</body>
 	<script src="map_viz.js"></script>
-	<script>
-  </script>
 </html>
 

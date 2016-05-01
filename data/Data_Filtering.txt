@@ -1,0 +1,65 @@
+Data Filtering
+
+Vehicle
+- Recovered Vehicle
+- Vehicle Theft
+
+Violent
+- Assault
+
+Domestic
+- Family Offenses
+- Kidnapping
+
+Theft
+- Burglary
+- Larceny
+- Robbery
+- Stolen Property
+
+
+Financial/Fraud
+- Bad Checks
+- Bribery
+- Embezzlement
+- Extortion
+- Forgery/Counterfeiting
+- Fraud
+- Gambling
+
+Substance-Related
+- DUI
+- Drugs/Narcotics
+- Drunkeness
+- Liquor Laws
+
+Sex-Related
+- Pornography/Obscene Mat
+- Prostitution
+- Sex Offenses, Forcible
+- Sex Offenses, Non-Forcible
+
+Property
+- Arson
+- Trespass
+- Property
+
+Weapons
+- Weapon Laws
+
+Non-Violent
+- Disorderly Conduct
+- Loitering
+- Runaway
+- Suicide
+
+Other
+- Missing Person
+- Secondary Codes
+- Noncriminal
+- Other Offenses
+- Suspicious Occ
+- Trea
+- Warrant
+
+

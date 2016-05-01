@@ -1,0 +1,30 @@
+
+
+#content{
+	float:left;
+	display:inline-block;
+}
+#map{
+	float:left;
+}
+#chart{
+	display: none;
+}
+
+#slider_A{
+	color:#ff0000;
+}
+
+#slider_A_label{
+	color:#ff0000;
+}
+
+#slider_B{
+	color:#0000ff;
+}
+
+
+#slider_B_label{
+	color:#0000ff;
+}
+
