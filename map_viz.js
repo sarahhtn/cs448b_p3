@@ -54,3 +54,13 @@ d3.json("data/scpd_incidents.json", function(error, data) {
 //                        .style("fill", function(d) { return d.color; });
 
 
+
+
+// BEGIN FILTERING FUNCTIONS
+d3.selectAll(".dow").on("change", function(){
+	var day = this.value;
+	var visibility = this.checked ? "visible" : "hidden";
+	svg.selectAll("circle")
+		.filter(function(d){ return d.DayOfWeek == day})
+		.attr("visibility", visibility);
+});
