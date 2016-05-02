@@ -350,7 +350,7 @@ $("#time-of-day-slider").slider({
 	min: 0,
 	max: 1440,
 	step: 15,
-	values: [600, 720],
+	values: [0, 1440],
 	slide: function (e, ui) {
         var hours1 = Math.floor(ui.values[0] / 60);
         var minutes1 = ui.values[0] - (hours1 * 60);
