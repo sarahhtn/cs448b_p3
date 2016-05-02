@@ -317,6 +317,19 @@ categoryDict["ASSAULT"] = "Violent";
 
 categoryDict["WEAPON LAWS"] = "Weapons";
 
+var toolTipDict = {};
+toolTipDict["Domestic"] = "Family Offenses, Kidnapping";
+toolTipDict["Financial,Fraud"] = "Bad Checks, Bribery, Embezzlement, Extortion, Forgery/Counterfeiting, Fraud, Gambling";
+toolTipDict["Non-Violent"] = "Disorderly Conduct, Loitering, Runaway, Suicide";
+toolTipDict["Other"] = "Missing Person, Secondary Codes, Noncriminal, Other Offenses, Suspicious Occ, Trea, Warrant";
+toolTipDict["Property"] = "Arson, Trespass, Property";
+toolTipDict["Sex-Related"] = "Pornography/Obscene Mat, Prostitution, Sex Offenses (Forcible), Sex Offenses (Non-Forcible)";
+toolTipDict["Substance-Related"] = "DUI, Drugs/Narcotics, Drunkeness, Liquor Laws";
+toolTipDict["Theft"] = "Burglary, Larceny/Theft, Robbery, Stolen Property"
+toolTipDict["Vehicle"] = "Recovered Vehicle, Vehicle Theft";
+toolTipDict["Violent"] = "Assault";
+toolTipDict["Weapons"] = "Weapon Laws";
+
 // set d3 color coding
 var color = d3.scale.ordinal()
 	.domain(categories)
@@ -331,7 +344,7 @@ var colorCrimeCategory = function(subcategory){
 // create the categories input controls, along with color swatches
 for (var i=0; i<categories.length; i++){
 	category = categories[i];
-	$('#category-selectors').append("<div class='category-wrapper'><label><input type='checkbox' id=" + category + " class='crime-category' checked><div class='color-swatch' style='background-color:"+color(category)+";'></div>" + category + "</label><div>");
+	$('#category-selectors').append("<div class='category-wrapper'><label title='"+toolTipDict[category]+"'><input type='checkbox' id=" + category + " class='crime-category' checked><div class='color-swatch' style='background-color:"+color(category)+";'></div>" + category + "</label><div>");
 }
 
 var checkCategory = function(category){
