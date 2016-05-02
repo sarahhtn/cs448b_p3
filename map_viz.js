@@ -199,7 +199,7 @@ function visiblePoints(){
             div.transition()		
                 .duration(200)		
                 .style("opacity", .9);		
-            div	.html(d.DayOfWeek + "<br/>" + d.Category)	
+            div	.html(d.DayOfWeek + "<br/>" + d.Description)	
                 .style("left", (d3.event.pageX) + "px")		
                 .style("top", (d3.event.pageY - 28) + "px");	
             });
