@@ -133,7 +133,7 @@ $(function() {
 		value: 50
 	});
 	var radiusMiles = pixelsToMiles(d3.select("#area_A").attr("r")).toFixed(2);
-	$('#slider_A_label').html("<b>Home</b>: " + radiusMiles + " mi radius");
+	$('#slider_A_label').html("<b>Location A</b>: " + radiusMiles + " mi radius");
 });
 
 $(function() {
@@ -141,7 +141,7 @@ $(function() {
 		value: 50
 	});
 	var radiusMiles = pixelsToMiles(d3.select("#area_B").attr("r")).toFixed(2);
-	$('#slider_B_label').html("<b>Work</b>: " + radiusMiles + " mi radius");
+	$('#slider_B_label').html("<b>Location B</b>: " + radiusMiles + " mi radius");
 });
 
 var slider_A_down = false;
