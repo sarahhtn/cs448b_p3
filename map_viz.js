@@ -8,6 +8,7 @@ var projection = d3.geo.mercator()
 	.center([-122.433701, 37.767683]) // San Francisco, roughly
 	.scale(225000)
 	.translate([width / 2, height / 2]);
+
 // This is the mapping between <longitude, latitude> position to <x, y> pixel position on the map
 // projection([lon, lat]) returns [x, y]
 
@@ -57,8 +58,8 @@ var area_A = svg.append("circle")
                  .attr("cy", 300)
                  .attr("r", area_radius*.5)
                  .attr("fill", "white")
-                 .attr("stroke", "red")
-                 .attr("stroke-width", "3")
+                 .attr("stroke", "#E85443")
+                 .attr("stroke-width", "2")
                  .attr("stroke-opacity", "1.0")
                  .attr("fill-opacity", "0.0")                 
                  .attr("z-index", "100")
@@ -69,8 +70,8 @@ var area_B = svg.append("circle")
                  .attr("cy", 300)
                  .attr("r", area_radius*.5)
                  .attr("fill", "white")
-                 .attr("stroke", "blue")
-                 .attr("stroke-width", "3")
+                 .attr("stroke", "#2276B5")
+                 .attr("stroke-width", "2")
                  .attr("stroke-opacity", "1.0")
                  .attr("fill-opacity", "0.0")
                  .attr("z-index", "100")
@@ -175,7 +176,16 @@ $("#slider_B").mouseup(function(){
 	slider_B_down = false;
 });
 
+$("body").mouseup(function(){
+	visiblePoints();
+});
+
 // AREA INTERSECTION CODE
+
+// Define the div for the tooltip
+var div = d3.select("body").append("div")	
+    .attr("class", "tooltip")				
+    .style("opacity", 0);
 
 function visiblePoints(){
 	svg.selectAll("circle")
@@ -184,7 +194,15 @@ function visiblePoints(){
 		.filter(function(d){ 
 			return insideIntersection(d)
 		})
-		.attr("visibility", "visible");
+		.attr("visibility", "visible")
+		.on("mouseover", function(d) {		
+            div.transition()		
+                .duration(200)		
+                .style("opacity", .9);		
+            div	.html(d.DayOfWeek + "<br/>" + d.Category)	
+                .style("left", (d3.event.pageX) + "px")		
+                .style("top", (d3.event.pageY - 28) + "px");	
+            });
 	$("#area_A").attr("visibility", "visible");
 	$("#area_B").attr("visibility", "visible");
 }

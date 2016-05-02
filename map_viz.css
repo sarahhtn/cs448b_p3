@@ -16,7 +16,7 @@
 }
 
 #slider_A_label{
-	color:#ff0000;
+	color:#E84743;
 }
 
 #slider_B{
@@ -25,7 +25,7 @@
 
 
 #slider_B_label{
-	color:#0000ff;
+	color:#2276B5;
 }
 
 .color-swatch{
@@ -40,6 +40,20 @@
 	display: inline-block;
 	min-width: 200px;
 }
+
+
+div.tooltip {	
+    position: absolute;			
+    text-align: center;			
+    width: 100px;					
+    height: 40px;					
+    padding: 2px;				
+    font: 12px sans-serif;		
+    background: #EBEC5C;	
+    border: 0px;		
+    border-radius: 8px;			
+    pointer-events: none;	
+}		
 
 #time-of-day-slider{
 	margin-top: 10px;
