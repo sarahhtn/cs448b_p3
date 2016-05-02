@@ -305,6 +305,7 @@ d3.selectAll(".crime-category").on("change", function(){
 
 
 // time of day slider
+// credit for slider code: http://jsfiddle.net/jrweinb/MQ6VT/
 $("#time-of-day-slider").slider({
 	range: true,
 	min: 0,
@@ -335,13 +336,10 @@ $("#time-of-day-slider").slider({
             minutes1 = minutes1;
         }
 
-
-
+        //now replacing text about time slider to reflect selected value
         $('.slider-time').html(hours1 + ':' + minutes1);
-
         var hours2 = Math.floor(ui.values[1] / 60);
         var minutes2 = ui.values[1] - (hours2 * 60);
-
         if (hours2.length == 1) hours2 = '0' + hours2;
         if (minutes2.length == 1) minutes2 = '0' + minutes2;
         if (minutes2 == 0) minutes2 = '00';
@@ -360,10 +358,11 @@ $("#time-of-day-slider").slider({
             hours2 = hours2;
             minutes2 = minutes2 + " AM";
         }
-
         $('.slider-time2').html(hours2 + ':' + minutes2);
     }
 });
 
-// credit for slider code: http://jsfiddle.net/jrweinb/MQ6VT/
+$(".time-of-day-slider").on("slidechange", function(event, ui){
+	console.log("change");
+});
 
