@@ -42,7 +42,7 @@
 }
 
 
-div.tooltip {	
+/*div.tooltip {	
     position: absolute;			
     text-align: center;			
     width: 100px;					
@@ -53,7 +53,7 @@ div.tooltip {
     border: 0px;		
     border-radius: 8px;			
     pointer-events: none;	
-}		
+}	*/	
 
 #time-of-day-slider{
 	margin-top: 10px;
