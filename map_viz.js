@@ -263,19 +263,19 @@ d3.selectAll(".dow").on("change", function(){
 });
 
 //INITALIZING COLORS & CATEGORIES
-var categories = ["Domestic", "Financial-Fraud", "Non-Violent", "Other", "Property", "Sex-Related", "Substance-Related", "Theft", "Vehicle", "Violent", "Weapons"];
+var categories = ["Domestic", "Financial,Fraud", "Non-Violent", "Other", "Property", "Sex-Related", "Substance-Related", "Theft", "Vehicle", "Violent", "Weapons"];
 
 var categoryDict = {};
 categoryDict["FAMILY OFFENSES"] = "Domestic";
 categoryDict["KIDNAPPING"] = "Domestic";
 
-categoryDict["BAD CHECKS"] = "Financial-Fraud";
-categoryDict["BRIBERY"] = "Financial-Fraud";
-categoryDict["EMBEZZLEMENT"] = "Financial-Fraud";
-categoryDict["EXTORTION"] = "Financial-Fraud";
-categoryDict["FORGERY/COUNTERFEITING"] = "Financial-Fraud";
-categoryDict["FRAUD"] = "Financial-Fraud";
-categoryDict["GAMBLING"] = "Financial-Fraud";
+categoryDict["BAD CHECKS"] = "Financial,Fraud";
+categoryDict["BRIBERY"] = "Financial,Fraud";
+categoryDict["EMBEZZLEMENT"] = "Financial,Fraud";
+categoryDict["EXTORTION"] = "Financial,Fraud";
+categoryDict["FORGERY/COUNTERFEITING"] = "Financial,Fraud";
+categoryDict["FRAUD"] = "Financial,Fraud";
+categoryDict["GAMBLING"] = "Financial,Fraud";
 
 categoryDict["DISORDERLY CONDUCT"] = "Non-Violent";
 categoryDict["LOITERING"] = "Non-Violent";
