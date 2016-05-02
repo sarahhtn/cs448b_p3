@@ -192,14 +192,14 @@ function visiblePoints(){
 		.attr("visibility", "hidden");
 	svg.selectAll("circle")
 		.filter(function(d){ 
-			return insideIntersection(d)
+			return insideIntersection(d) && checkDOW(d.DayOfWeek); //ADD OTHER LOGIC HERE!!!
 		})
 		.attr("visibility", "visible")
 		.on("mouseover", function(d) {		
             div.transition()		
                 .duration(200)		
                 .style("opacity", .9);		
-            div	.html(d.DayOfWeek + "<br/>" + d.Description)	
+            div	.html(d.DayOfWeek + " " + d.Time + "<br/>" + d.Description)	
                 .style("left", (d3.event.pageX) + "px")		
                 .style("top", (d3.event.pageY - 28) + "px");	
             });
@@ -233,12 +233,12 @@ function insideArea(A_cx, A_cy, A_r, B_cx, B_cy, B_r, x, y){
 
 // BEGIN FILTERING FUNCTIONS
 //DAY OF THE WEEK
+var checkDOW = function(day){
+	return $('#'+day).is(':checked');
+}
+
 d3.selectAll(".dow").on("change", function(){
-	var day = this.value;
-	var visibility = this.checked ? "visible" : "hidden";
-	svg.selectAll("circle")
-		.filter(function(d){ return d.DayOfWeek == day})
-		.attr("visibility", visibility);
+	visiblePoints();
 });
 
 //INITALIZING COLORS & CATEGORIES
@@ -377,10 +377,13 @@ $("#time-of-day-slider").slider({
             minutes2 = minutes2 + " AM";
         }
         $('.slider-time2').html(hours2 + ':' + minutes2);
+    },
+    change: function(event, ui){
+    	console.log(ui.values);
+    	time = ui.values[0];
+    	hours1 = Math.floor(ui.values[0] / 60);
+    	minutes1 = minutes1 = ui.values[0] - (hours1 * 60);
+    	console.log("time1: " + hours1 + ":" + minutes1);
     }
-});
-
-$(".time-of-day-slider").on("slidechange", function(event, ui){
-	console.log("change");
 });
 
