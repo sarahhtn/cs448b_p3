@@ -192,7 +192,7 @@ function visiblePoints(){
 		.attr("visibility", "hidden");
 	svg.selectAll("circle")
 		.filter(function(d){ 
-			return insideIntersection(d) && checkDOW(d.DayOfWeek) && checkCategory(d.Category); //ADD OTHER LOGIC HERE!!!
+			return insideIntersection(d) && checkDOW(d.DayOfWeek) && checkCategory(d.Category) && checkTime(d.Time); //ADD OTHER LOGIC HERE!!!
 		})
 		.attr("visibility", "visible")
 		.on("mouseover", function(d) {		
@@ -319,11 +319,6 @@ var checkCategory = function(category){
 
 d3.selectAll(".crime-category").on("change", function(){
 	visiblePoints();
-	// var category = this.value;
-	// var visibility = this.checked ? "visible" : "hidden";
-	// svg.selectAll("circle")
-	// 	.filter(function(d){ return categoryDict[d.Category] == category})
-	// 	.attr("visibility", visibility);
 });
 
 
@@ -384,11 +379,20 @@ $("#time-of-day-slider").slider({
         $('.slider-time2').html(hours2 + ':' + minutes2);
     },
     change: function(event, ui){
-    	console.log(ui.values);
-    	time = ui.values[0];
-    	hours1 = Math.floor(ui.values[0] / 60);
-    	minutes1 = minutes1 = ui.values[0] - (hours1 * 60);
-    	console.log("time1: " + hours1 + ":" + minutes1);
+    	visiblePoints();
     }
 });
+
+var toMins = function(str){
+	val = str.split(":");
+	hour = parseInt(val[0]);
+	mins = parseInt(val[1]);
+	return hour*60+mins;
+}
+
+var checkTime = function(time){
+	var values = $('#time-of-day-slider').slider("values");
+	timeInMins = toMins(time);
+	return timeInMins >=values[0] && timeInMins <= values[1];
+}
 
