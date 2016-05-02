@@ -28,10 +28,6 @@
 	color:#0000ff;
 }
 
-body {
-	font-family: sans-serif;
-}
-
 .color-swatch{
 	width: 10px;
 	height: 10px;
@@ -43,4 +39,8 @@ body {
 .category-wrapper{
 	display: inline-block;
 	min-width: 200px;
+}
+
+#time-of-day-slider{
+	margin-top: 10px;
 }
