@@ -213,15 +213,15 @@ function visiblePoints(){
 		.attr("visibility", "hidden");
 	svg.selectAll("circle")
 		.filter(function(d){ 
-			return insideIntersection(d) && checkDOW(d.DayOfWeek); //ADD OTHER LOGIC HERE!!!
+			return insideIntersection(d) && checkDOW(d.DayOfWeek) && checkCategory(d.Category) && checkTime(d.Time); //ADD OTHER LOGIC HERE!!!
 		})
 		.attr("visibility", "visible")
 		.on("mouseover", function(d) {
-		console.log(d.Location[0], ", ", d.Location[1]);		
             div.transition()		
                 .duration(200)		
                 .style("opacity", .9);		
-            div	.html( "<h3> DAY OF WEEK: </h3>" + d.DayOfWeek + "<h3> CRIME DESCRIPTION: </h3>" +  d.Description + "<h3> Location X: " + projection(d.Location)[0] + "<h3> Location Y: " + projection(d.Location)[1])                .style("left", (d3.event.pageX) + "px")		
+            div.html( "<h3> DAY OF WEEK: </h3>" + d.DayOfWeek + "<h3> CRIME DESCRIPTION: </h3>" +  d.Description)
+                .style("left", (d3.event.pageX) + "px")		
                 .style("top", (d3.event.pageY - 28) + "px");	
             });
 	$("#area_A").attr("visibility", "visible");
@@ -263,19 +263,19 @@ d3.selectAll(".dow").on("change", function(){
 });
 
 //INITALIZING COLORS & CATEGORIES
-var categories = ["Domestic", "Financial/Fraud", "Non-Violent", "Other", "Property", "Sex-Related", "Substance-Related", "Theft", "Vehicle", "Violent", "Weapons"];
+var categories = ["Domestic", "Financial-Fraud", "Non-Violent", "Other", "Property", "Sex-Related", "Substance-Related", "Theft", "Vehicle", "Violent", "Weapons"];
 
 var categoryDict = {};
 categoryDict["FAMILY OFFENSES"] = "Domestic";
 categoryDict["KIDNAPPING"] = "Domestic";
 
-categoryDict["BAD CHECKS"] = "Financial/Fraud";
-categoryDict["BRIBERY"] = "Financial/Fraud";
-categoryDict["EMBEZZLEMENT"] = "Financial/Fraud";
-categoryDict["EXTORTION"] = "Financial/Fraud";
-categoryDict["FORGERY/COUNTERFEITING"] = "Financial/Fraud";
-categoryDict["FRAUD"] = "Financial/Fraud";
-categoryDict["GAMBLING"] = "Financial/Fraud";
+categoryDict["BAD CHECKS"] = "Financial-Fraud";
+categoryDict["BRIBERY"] = "Financial-Fraud";
+categoryDict["EMBEZZLEMENT"] = "Financial-Fraud";
+categoryDict["EXTORTION"] = "Financial-Fraud";
+categoryDict["FORGERY/COUNTERFEITING"] = "Financial-Fraud";
+categoryDict["FRAUD"] = "Financial-Fraud";
+categoryDict["GAMBLING"] = "Financial-Fraud";
 
 categoryDict["DISORDERLY CONDUCT"] = "Non-Violent";
 categoryDict["LOITERING"] = "Non-Violent";
@@ -331,15 +331,15 @@ var colorCrimeCategory = function(subcategory){
 // create the categories input controls, along with color swatches
 for (var i=0; i<categories.length; i++){
 	category = categories[i];
-	$('#category-selectors').append("<div class='category-wrapper'><label><input type='checkbox' value=" + category + " class='crime-category' checked><div class='color-swatch' style='background-color:"+color(category)+";'></div>" + category + "</label><div>");
+	$('#category-selectors').append("<div class='category-wrapper'><label><input type='checkbox' id=" + category + " class='crime-category' checked><div class='color-swatch' style='background-color:"+color(category)+";'></div>" + category + "</label><div>");
+}
+
+var checkCategory = function(category){
+	return $('#'+categoryDict[category]).is(':checked');
 }
 
 d3.selectAll(".crime-category").on("change", function(){
-	var category = this.value;
-	var visibility = this.checked ? "visible" : "hidden";
-	svg.selectAll("circle")
-		.filter(function(d){ return categoryDict[d.Category] == category})
-		.attr("visibility", visibility);
+	visiblePoints();
 });
 
 
@@ -400,11 +400,20 @@ $("#time-of-day-slider").slider({
         $('.slider-time2').html(hours2 + ':' + minutes2);
     },
     change: function(event, ui){
-    	console.log(ui.values);
-    	time = ui.values[0];
-    	hours1 = Math.floor(ui.values[0] / 60);
-    	minutes1 = minutes1 = ui.values[0] - (hours1 * 60);
-    	console.log("time1: " + hours1 + ":" + minutes1);
+    	visiblePoints();
     }
 });
+
+var toMins = function(str){
+	val = str.split(":");
+	hour = parseInt(val[0]);
+	mins = parseInt(val[1]);
+	return hour*60+mins;
+}
+
+var checkTime = function(time){
+	var values = $('#time-of-day-slider').slider("values");
+	timeInMins = toMins(time);
+	return timeInMins >=values[0] && timeInMins <= values[1];
+}
 
