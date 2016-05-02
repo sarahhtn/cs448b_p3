@@ -298,7 +298,7 @@ var colorCrimeCategory = function(subcategory){
 // create the categories input controls, along with color swatches
 for (var i=0; i<categories.length; i++){
 	category = categories[i];
-	$('#category-selectors').append("<div class='category-wrapper'><label><input type='checkbox' value=" + category + " class='crime-category' checked>" + category + "</label><div class='color-swatch' style='background-color:"+color(category)+";'</div></div>");
+	$('#category-selectors').append("<div class='category-wrapper'><label><input type='checkbox' value=" + category + " class='crime-category' checked><div class='color-swatch' style='background-color:"+color(category)+";'></div>" + category + "</label><div>");
 }
 
 d3.selectAll(".crime-category").on("change", function(){
