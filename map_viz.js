@@ -192,7 +192,7 @@ function visiblePoints(){
 		.attr("visibility", "hidden");
 	svg.selectAll("circle")
 		.filter(function(d){ 
-			return insideIntersection(d) && checkDOW(d.DayOfWeek); //ADD OTHER LOGIC HERE!!!
+			return insideIntersection(d) && checkDOW(d.DayOfWeek) && checkCategory(d.Category); //ADD OTHER LOGIC HERE!!!
 		})
 		.attr("visibility", "visible")
 		.on("mouseover", function(d) {		
@@ -242,19 +242,19 @@ d3.selectAll(".dow").on("change", function(){
 });
 
 //INITALIZING COLORS & CATEGORIES
-var categories = ["Domestic", "Financial/Fraud", "Non-Violent", "Other", "Property", "Sex-Related", "Substance-Related", "Theft", "Vehicle", "Violent", "Weapons"];
+var categories = ["Domestic", "Financial-Fraud", "Non-Violent", "Other", "Property", "Sex-Related", "Substance-Related", "Theft", "Vehicle", "Violent", "Weapons"];
 
 var categoryDict = {};
 categoryDict["FAMILY OFFENSES"] = "Domestic";
 categoryDict["KIDNAPPING"] = "Domestic";
 
-categoryDict["BAD CHECKS"] = "Financial/Fraud";
-categoryDict["BRIBERY"] = "Financial/Fraud";
-categoryDict["EMBEZZLEMENT"] = "Financial/Fraud";
-categoryDict["EXTORTION"] = "Financial/Fraud";
-categoryDict["FORGERY/COUNTERFEITING"] = "Financial/Fraud";
-categoryDict["FRAUD"] = "Financial/Fraud";
-categoryDict["GAMBLING"] = "Financial/Fraud";
+categoryDict["BAD CHECKS"] = "Financial-Fraud";
+categoryDict["BRIBERY"] = "Financial-Fraud";
+categoryDict["EMBEZZLEMENT"] = "Financial-Fraud";
+categoryDict["EXTORTION"] = "Financial-Fraud";
+categoryDict["FORGERY/COUNTERFEITING"] = "Financial-Fraud";
+categoryDict["FRAUD"] = "Financial-Fraud";
+categoryDict["GAMBLING"] = "Financial-Fraud";
 
 categoryDict["DISORDERLY CONDUCT"] = "Non-Violent";
 categoryDict["LOITERING"] = "Non-Violent";
@@ -310,15 +310,20 @@ var colorCrimeCategory = function(subcategory){
 // create the categories input controls, along with color swatches
 for (var i=0; i<categories.length; i++){
 	category = categories[i];
-	$('#category-selectors').append("<div class='category-wrapper'><label><input type='checkbox' value=" + category + " class='crime-category' checked><div class='color-swatch' style='background-color:"+color(category)+";'></div>" + category + "</label><div>");
+	$('#category-selectors').append("<div class='category-wrapper'><label><input type='checkbox' id=" + category + " class='crime-category' checked><div class='color-swatch' style='background-color:"+color(category)+";'></div>" + category + "</label><div>");
+}
+
+var checkCategory = function(category){
+	return $('#'+categoryDict[category]).is(':checked');
 }
 
 d3.selectAll(".crime-category").on("change", function(){
-	var category = this.value;
-	var visibility = this.checked ? "visible" : "hidden";
-	svg.selectAll("circle")
-		.filter(function(d){ return categoryDict[d.Category] == category})
-		.attr("visibility", visibility);
+	visiblePoints();
+	// var category = this.value;
+	// var visibility = this.checked ? "visible" : "hidden";
+	// svg.selectAll("circle")
+	// 	.filter(function(d){ return categoryDict[d.Category] == category})
+	// 	.attr("visibility", visibility);
 });
 
 
