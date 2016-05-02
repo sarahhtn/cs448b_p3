@@ -34,6 +34,18 @@ d3.json("data/scpd_incidents.json", function(error, data) {
 
   data = data["data"];
 
+  var pointA = [-122.450181, 37.766097];
+  var pointB = [-122.398536, 37.791546];
+  var points = {pointA, pointB};
+
+  svg.selectAll("circle")
+		.data(points).enter()
+		.append("circle")
+		.attr("cx", function (d) { return projection(d.Location)[0]; })
+		.attr("cy", function (d) { return projection(d.Location)[1]; })
+		.attr("r", "20px")
+		.attr("fill", "black");
+
   // If there is no error, then data is actually ready to use
   svg.selectAll("circle")
 		.data(data).enter()
