@@ -3,11 +3,20 @@
 var width = 750,
 	height = width;
 
+// Pixels to miles scalar
+
+var pixToMiles = 0.01656250629;	
+
 // Set up projection that map is using
 var projection = d3.geo.mercator()
 	.center([-122.433701, 37.767683]) // San Francisco, roughly
 	.scale(225000)
 	.translate([width / 2, height / 2]);
+
+function pixelsToMiles(pixDist){
+	var milesDist = pixDist * pixToMiles;
+	return milesDist;
+}
 
 // This is the mapping between <longitude, latitude> position to <x, y> pixel position on the map
 // projection([lon, lat]) returns [x, y]
@@ -33,18 +42,6 @@ d3.json("data/scpd_incidents.json", function(error, data) {
   }
 
   data = data["data"];
-
-  var pointA = [-122.450181, 37.766097];
-  var pointB = [-122.398536, 37.791546];
-  var points = {pointA, pointB};
-
-  svg.selectAll("circle")
-		.data(points).enter()
-		.append("circle")
-		.attr("cx", function (d) { return projection(d.Location)[0]; })
-		.attr("cy", function (d) { return projection(d.Location)[1]; })
-		.attr("r", "20px")
-		.attr("fill", "black");
 
   // If there is no error, then data is actually ready to use
   svg.selectAll("circle")
@@ -135,12 +132,16 @@ $(function() {
 	var slider_a = $( "#slider_A" ).slider({
 		value: 50
 	});
+	var radiusMiles = pixelsToMiles(d3.select("#area_A").attr("r")).toFixed(2);
+	$('#slider_A_label').html("<b>Home</b>: " + radiusMiles + " mi radius");
 });
 
 $(function() {
 	var slider_b = $( "#slider_B" ).slider({
 		value: 50
 	});
+	var radiusMiles = pixelsToMiles(d3.select("#area_B").attr("r")).toFixed(2);
+	$('#slider_B_label').html("<b>Work</b>: " + radiusMiles + " mi radius");
 });
 
 var slider_A_down = false;
@@ -151,6 +152,8 @@ $("#area_slider").mousemove(function(){
 		var radius_a = $( "#slider_A" ).slider( "option", "value" );
 		d3.select("#area_A")
 			.attr("r", (radius_a/100.0)*area_radius);
+		var radiusMiles = pixelsToMiles(d3.select("#area_A").attr("r")).toFixed(2);
+		$('#slider_A_label').html("<b>Home</b>: " + radiusMiles + " mi radius");
 	}
 });
 
@@ -159,6 +162,8 @@ $("#area_slider").mousemove(function(){
 		var radius_b = $( "#slider_B" ).slider( "option", "value" );
 		d3.select("#area_B")
 			.attr("r", (radius_b/100.0)*area_radius);
+		var radiusMiles = pixelsToMiles(d3.select("#area_B").attr("r")).toFixed(2);
+		$('#slider_B_label').html("<b>Work</b>: " + radiusMiles + " mi radius");
 	}
 });
 
@@ -175,6 +180,8 @@ $("#slider_A").mouseup(function(){
 		visiblePoints();
 		d3.select("#area_A")
 			.attr("fill-opacity", "0");
+		var radiusMiles = pixelsToMiles(d3.select("#area_A").attr("r")).toFixed(2);
+		$('#slider_A_label').html("<b>Home</b>: " + radiusMiles + " mi radius");
 	}
 	slider_A_down = false;
 });
@@ -184,6 +191,8 @@ $("#slider_B").mouseup(function(){
 		visiblePoints();
 		d3.select("#area_B")
 			.attr("fill-opacity", "0");
+		var radiusMiles = pixelsToMiles(d3.select("#area_B").attr("r")).toFixed(2);
+		$('#slider_B_label').html("<b>Work</b>: " + radiusMiles + " mi radius");
 	}
 	slider_B_down = false;
 });
@@ -207,12 +216,12 @@ function visiblePoints(){
 			return insideIntersection(d) && checkDOW(d.DayOfWeek); //ADD OTHER LOGIC HERE!!!
 		})
 		.attr("visibility", "visible")
-		.on("mouseover", function(d) {		
+		.on("mouseover", function(d) {
+		console.log(d.Location[0], ", ", d.Location[1]);		
             div.transition()		
                 .duration(200)		
                 .style("opacity", .9);		
-            div	.html( "<h3> DAY OF WEEK: </h3>" + d.DayOfWeek + "<h3> CRIME DESCRIPTION: </h3>" +  d.Description);
-                .style("left", (d3.event.pageX) + "px")		
+            div	.html( "<h3> DAY OF WEEK: </h3>" + d.DayOfWeek + "<h3> CRIME DESCRIPTION: </h3>" +  d.Description + "<h3> Location X: " + projection(d.Location)[0] + "<h3> Location Y: " + projection(d.Location)[1])                .style("left", (d3.event.pageX) + "px")		
                 .style("top", (d3.event.pageY - 28) + "px");	
             });
 	$("#area_A").attr("visibility", "visible");
