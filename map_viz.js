@@ -8,6 +8,8 @@ var projection = d3.geo.mercator()
 	.center([-122.433701, 37.767683]) // San Francisco, roughly
 	.scale(225000)
 	.translate([width / 2, height / 2]);
+
+
 // This is the mapping between <longitude, latitude> position to <x, y> pixel position on the map
 // projection([lon, lat]) returns [x, y]
 
@@ -58,7 +60,7 @@ var area_A = svg.append("circle")
                  .attr("r", area_radius*.5)
                  .attr("fill", "white")
                  .attr("stroke", "red")
-                 .attr("stroke-width", "3")
+                 .attr("stroke-width", "2")
                  .attr("stroke-opacity", "1.0")
                  .attr("fill-opacity", "0.0")                 
                  .attr("z-index", "100")
@@ -70,7 +72,7 @@ var area_B = svg.append("circle")
                  .attr("r", area_radius*.5)
                  .attr("fill", "white")
                  .attr("stroke", "blue")
-                 .attr("stroke-width", "3")
+                 .attr("stroke-width", "2")
                  .attr("stroke-opacity", "1.0")
                  .attr("fill-opacity", "0.0")
                  .attr("z-index", "100")
@@ -173,6 +175,10 @@ $("#slider_B").mouseup(function(){
 			.attr("fill-opacity", "0");
 	}
 	slider_B_down = false;
+});
+
+$("body").mouseup(function(){
+	visiblePoints();
 });
 
 // AREA INTERSECTION CODE
