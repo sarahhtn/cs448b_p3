@@ -1,3 +1,8 @@
+html{
+	background-color:#202020;
+	color:#dfdfdf;
+}
+
 div, span, p, td {
 	font-family: Arial, sans-serif;
 }
@@ -43,6 +48,7 @@ div, span, p, td {
 	width: 240px;
 	display: inline-block;
 	vertical-align: top;
+	margin-left: 30px;
 }
 #side_panel section {
 	color: #505050;
@@ -181,10 +187,6 @@ label[for=linear] {
 }
 label[for=step] {
 	background-image: url(../images/interp_step.png);
-}
-
-.tooltip{
-	width:300px;
 }
 
 

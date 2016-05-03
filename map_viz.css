@@ -1,4 +1,11 @@
 
+h4{
+	color:#dfdfdf;
+}
+
+span{
+	color:#dfdfdf;
+}
 
 #content{
 	float:left;
@@ -39,22 +46,27 @@
 .category-wrapper{
 	display: inline-block;
 	min-width: 200px;
+	color:#dfdfdf;
 }
 
+.time-of-day-wrapper{
+	color:#dfdfdf;
+}
 
-/*div.tooltip {	
-    position: absolute;			
-    text-align: center;			
-    width: 100px;					
-    height: 40px;					
-    padding: 2px;				
-    font: 12px sans-serif;		
-    background: #EBEC5C;	
-    border: 0px;		
-    border-radius: 8px;			
-    pointer-events: none;	
-}	*/	
 
 #time-of-day-slider{
 	margin-top: 10px;
 }
+
+#query-controls{
+	color:#dfdfdf;
+}
+
+.slider-time{
+	color:#dfdfdf;
+}
+ 
+.slider-time2{
+	color:#dfdfdf;
+}
+
