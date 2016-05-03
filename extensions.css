@@ -182,3 +182,11 @@ label[for=linear] {
 label[for=step] {
 	background-image: url(../images/interp_step.png);
 }
+
+.tooltip{
+	width:300px;
+}
+
+
+
+

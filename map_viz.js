@@ -1,4 +1,20 @@
 
+// Date Time Info
+var months = new Array();
+months[0] = "January";
+months[1] = "February";
+months[2] = "March";
+months[3] = "April";
+months[4] = "May";
+months[5] = "June";
+months[6] = "July";
+months[7] = "August";
+months[8] = "September";
+months[9] = "October";
+months[10] = "November";
+months[11] = "December";
+
+
 // Set up size
 var width = 750,
 	height = width;
@@ -205,8 +221,10 @@ $("body").mouseup(function(){
 
 // Define the div for the tooltip
 var div = d3.select("body").append("div")	
-    .attr("class", "tooltip")				
-    .style("opacity", 0);
+    .attr("id", "tooltip")		
+    .style("height", "150px")		
+    .style("opacity", 0)
+    .style("float", "left");
 
 function visiblePoints(){
 	svg.selectAll("circle")
